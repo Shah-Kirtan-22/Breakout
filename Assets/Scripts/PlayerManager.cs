@@ -6,11 +6,11 @@ public class PlayerManager : MonoBehaviour
 {
     [SerializeField]
     private float m_Speed; // the speed at which the board moves
-    public Transform m_Player; 
+    private Transform m_Player;
 
     private void Start()
     {
-        m_Player = GetComponent<Transform>();  // get the transform of the player
+        m_Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();  // get the transform of the player
     }
 
 
@@ -28,20 +28,22 @@ public class PlayerManager : MonoBehaviour
 
     private void MoveLeft()
     {
+        
         Vector3 nextPosition = m_Player.position;  // set the next position to be the current position (temp variable)
-        nextPosition.x -= m_Speed;  // to move left subtract the speed in the x direction (subtract ~ -x on the scale)
+        nextPosition.x -= m_Speed * Time.deltaTime;  // to move left subtract the speed in the x direction (subtract ~ -x on the scale) && delta time to keep it uniform
         m_Player.position = nextPosition;
 
 
-        Debug.Log("Left arrow pressed");
+        //Debug.Log("Left arrow pressed");
+
     }
     
     private void MoveRight()
     {
         Vector3 nextPosition = m_Player.position;
-        nextPosition.x += m_Speed;
+        nextPosition.x += m_Speed * Time.deltaTime;
         m_Player.position = nextPosition; 
      
-        Debug.Log("Right arrow pressed");
+        //Debug.Log("Right arrow pressed");
     }
 }
